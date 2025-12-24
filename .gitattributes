@@ -1,0 +1,4 @@
+assets/NOV[[:space:]]2023 filter=lfs diff=lfs merge=lfs -text
+Showcase[[:space:]]of[[:space:]]my[[:space:]]handmade[[:space:]]Christmas[[:space:]]tree[[:space:]]weaving[[:space:]]work.MOV filter=lfs diff=lfs merge=lfs -text
+assets/*.MOV filter=lfs diff=lfs merge=lfs -text
+*.MOV filter=lfs diff=lfs merge=lfs -text
