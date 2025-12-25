@@ -18,15 +18,15 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
-      <div 
-        className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity" 
+      <div
+        className="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
-      
+
       <div className="relative w-full max-w-4xl bg-zinc-900 border border-zinc-800 rounded-lg shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh] animate-in fade-in zoom-in duration-300">
-        
+
         {/* Close Button */}
-        <button 
+        <button
           onClick={onClose}
           className="absolute top-4 right-4 z-10 p-2 bg-black/50 hover:bg-white/20 rounded-full text-white transition-colors"
         >
@@ -35,9 +35,9 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
 
         {/* Image Section */}
         <div className="w-full md:w-1/2 h-64 md:h-auto bg-black relative">
-          <img 
-            src={project.imageUrl} 
-            alt={project.title} 
+          <img
+            src={project.imageUrl}
+            alt={project.title}
             className="w-full h-full object-cover opacity-90"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent md:hidden" />
@@ -62,17 +62,7 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
             </p>
           </div>
 
-          <div className="mt-auto">
-            <h4 className="text-sm uppercase tracking-wider text-gray-500 mb-3 font-bold">Themes & Methods</h4>
-            <div className="flex flex-wrap gap-2">
-              {project.tags.map(tag => (
-                <span key={tag} className="flex items-center px-3 py-1 bg-zinc-800 text-zinc-300 text-sm rounded-md border border-zinc-700">
-                  <Tag size={12} className="mr-2 opacity-50" />
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+
         </div>
       </div>
     </div>
