@@ -38,9 +38,9 @@ const VideoSection: React.FC = () => {
                 }
 
                 return (
-                    <div className="w-full h-full bg-zinc-900 flex flex-col items-center justify-center p-0 text-center rounded-sm overflow-hidden relative">
+                    <div className="w-full h-full bg-zinc-900 flex flex-col items-center justify-start pt-4 text-center rounded-sm overflow-auto relative">
                         <iframe
-                            className="w-full h-full border-none overflow-hidden rounded-sm relative z-10"
+                            className="w-[328px] h-[540px] border-none rounded-sm relative z-10 flex-shrink-0"
                             src={igUrl}
                             title={video.title}
                             allowTransparency={true}
@@ -51,7 +51,7 @@ const VideoSection: React.FC = () => {
                             href={video.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 bg-black/50 hover:bg-black/80 text-white text-[10px] uppercase tracking-widest px-3 py-1 rounded-full border border-white/20 transition-all"
+                            className="mt-4 mb-4 z-20 bg-black/50 hover:bg-black/80 text-white text-[10px] uppercase tracking-widest px-3 py-1 rounded-full border border-white/20 transition-all inline-block"
                         >
                             Watch on Instagram
                         </a>

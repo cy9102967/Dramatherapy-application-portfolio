@@ -84,21 +84,15 @@ const VideoWheelSection: React.FC = () => {
                     igUrl += '/embed';
                 }
                 return (
-                    <div className="w-full h-full bg-zinc-900 flex flex-col items-center justify-center relative rounded-lg overflow-hidden">
+                    <div className="w-full h-full bg-black flex items-center justify-center relative rounded-lg overflow-hidden">
                         <iframe
-                            className="w-full h-full border-none"
+                            className="w-[328px] max-h-full border-none rounded-sm"
+                            style={{ height: '800px' }}
                             src={igUrl}
                             title={video.title}
                             allowFullScreen
+                            scrolling="no"
                         />
-                        <a
-                            href={video.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 hover:bg-black/80 text-white text-xs uppercase tracking-widest px-4 py-2 rounded-full border border-white/20 transition-all"
-                        >
-                            Watch on Instagram
-                        </a>
                     </div>
                 );
             case 'local':
