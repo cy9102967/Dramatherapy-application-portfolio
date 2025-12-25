@@ -4,7 +4,8 @@ import { Project, Position } from './types';
 import FlashlightOverlay from './components/FlashlightOverlay';
 import ProjectModal from './components/ProjectModal';
 import VideoSection from './components/VideoSection';
-import { MousePointer2, Info } from 'lucide-react';
+import JourneyIntro from './components/JourneyIntro';
+import { MousePointer2 } from 'lucide-react';
 
 const App: React.FC = () => {
   const [mousePos, setMousePos] = useState<Position>({ x: -500, y: -500 });
@@ -12,8 +13,14 @@ const App: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
 
+  // Journey/Intro State
+  const [isIntro, setIsIntro] = useState(true);
+  const [demoPos, setDemoPos] = useState<Position>({ x: -500, y: -500 });
+
+  // Handle Mouse Move (User Interaction)
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
+      // Mouse move just updates position, no longer dismisses intro
       setMousePos({ x: e.clientX, y: e.clientY });
     };
 
@@ -25,10 +32,45 @@ const App: React.FC = () => {
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, []);
+  }, []); // Only run once, no need to depend on isIntro anymore
 
-  // Define irregular positions for the 7 items to orbit the center on desktop
-  // Using percentages to be responsive within the container
+  // Automatic "Demo" Flashlight Animation
+  useEffect(() => {
+    if (!isIntro) {
+      // Reset demo pos when intro ends (optional, helps cleanup)
+      return;
+    }
+
+    let startTime = Date.now();
+    let rafId: number;
+
+    const animate = () => {
+      const elapsed = (Date.now() - startTime) / 1000;
+
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+
+      // Orbit parameters
+      const rx = Math.min(window.innerWidth * 0.35, 350);
+      const ry = Math.min(window.innerHeight * 0.35, 250);
+
+      // Figure-8 / Lissajous movement
+      // x = A sin(at + d), y = B sin(bt)
+      const x = cx + Math.cos(elapsed * 0.8) * rx;
+      const y = cy + Math.sin(elapsed * 0.6) * ry;
+
+      setDemoPos({ x, y });
+      rafId = requestAnimationFrame(animate);
+    };
+
+    rafId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafId);
+  }, [isIntro]);
+
+  // Determine active flashlight position
+  const activeX = isIntro ? demoPos.x : mousePos.x;
+  const activeY = isIntro ? demoPos.y : mousePos.y;
+
   // Define irregular positions for the 7 items to orbit the center on desktop
   // Using percentages to be responsive within the container
   const desktopPositions = [
@@ -45,12 +87,21 @@ const App: React.FC = () => {
     <div className="relative min-h-screen bg-theater-black text-white font-sans selection:bg-theater-gold selection:text-black overflow-x-hidden">
 
       {/* The Flashlight Effect Layer (z-30) */}
-      <FlashlightOverlay x={mousePos.x} y={mousePos.y} isHovering={isHovering} />
+      {/* Takes activeX/Y which switches between demo and mouse */}
+      <FlashlightOverlay x={activeX} y={activeY} isHovering={isHovering} />
+
+      {/* Journey Instruction Overlay */}
+      <JourneyIntro visible={isIntro} onStart={() => setIsIntro(false)} />
 
       {/* Main Content Layer */}
       <main className="relative w-full min-h-screen flex flex-col items-center justify-center py-10 md:py-0 overflow-x-hidden">
 
         {/* Mobile Instruction Hint */}
+        {/* Only show if NOT in intro mode (since intro covers it, or keep it?) 
+            Actually mobile doesn't have mousemove, so isIntro might stay true?
+            Mobile relies on 'tap'.
+            Let's keep the existing mobile hint but maybe FlashlightOverlay handles mobile differently.
+        */}
         <div className="absolute top-6 left-0 right-0 flex justify-center md:hidden z-50 animate-pulse text-gray-500">
           <span className="flex items-center text-xs uppercase tracking-widest gap-2">
             <MousePointer2 size={12} /> Tap to explore
@@ -61,7 +112,7 @@ const App: React.FC = () => {
         <div className="hidden md:block relative w-full max-w-7xl h-[850px]">
 
           {/* Center Stage: The Name */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-40 text-center w-full max-w-lg">
+          <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full max-w-lg transition-all duration-1000 ${isIntro ? 'z-20' : 'z-40'}`}>
             {/* Glow effect */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/5 blur-[90px] rounded-full pointer-events-none" />
 

@@ -8,10 +8,10 @@ interface FlashlightOverlayProps {
 
 const FlashlightOverlay: React.FC<FlashlightOverlayProps> = ({ x, y, isHovering = false }) => {
   const [isTouchDevice, setIsTouchDevice] = useState(false);
-  const [radius, setRadius] = useState(250);
-  
+  const [radius, setRadius] = useState(350);
+
   // Target radius: 250px normally, 375px (1.5x) when hovering
-  const targetRadius = isHovering ? 375 : 250;
+  const targetRadius = isHovering ? 500 : 350;
 
   useEffect(() => {
     const checkTouch = () => {
@@ -25,7 +25,7 @@ const FlashlightOverlay: React.FC<FlashlightOverlayProps> = ({ x, y, isHovering 
   // Animation loop for smooth radius transition
   useEffect(() => {
     let rafId: number;
-    
+
     const animate = () => {
       setRadius(prev => {
         const diff = targetRadius - prev;
@@ -36,7 +36,7 @@ const FlashlightOverlay: React.FC<FlashlightOverlayProps> = ({ x, y, isHovering 
       });
       rafId = requestAnimationFrame(animate);
     };
-    
+
     rafId = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(rafId);
   }, [targetRadius]);
@@ -46,15 +46,15 @@ const FlashlightOverlay: React.FC<FlashlightOverlayProps> = ({ x, y, isHovering 
   };
 
   if (isTouchDevice) {
-     // On mobile, just provide a vignette
-     return (
-        <div 
+    // On mobile, just provide a vignette
+    return (
+      <div
         className="fixed inset-0 z-30 pointer-events-none transition-opacity duration-500"
         style={{
-            background: `radial-gradient(circle at center, transparent 30%, rgba(5, 5, 5, 0.85) 100%)`
+          background: `radial-gradient(circle at center, transparent 30%, rgba(5, 5, 5, 0.85) 100%)`
         }}
-        />
-     )
+      />
+    )
   }
 
   return (
