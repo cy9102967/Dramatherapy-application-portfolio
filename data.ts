@@ -7,7 +7,10 @@ import imgBand2014 from "./assets/DEC 2014 National Taiwan University Department
 import imgWinterCamp2015 from "./assets/FEB 2015, I acted in an interactive drama in a Winter Camp for students in Dingzhou elementary school, I play the role'A-Hua', who is the attendant of the Princess.jpg";
 import imgGeoDrama2016 from "./assets/MAY 2016, I playrd the role'Chi-Huo', who is a boss that fell out of love, in Department of Geography's night of National Taiwan University.jpg";
 import imgKaraoke2016 from './assets/NOV 2016, I was the organizer of the Karaoke Competition of the department of Geography in National Taiwan University.JPG';
-import videoBowl2025 from './assets/MAY 2025,.我在尼泊爾學習頌缽，打開身體感官，感受能量經由頌缽的震動流經身體。旁邊那位是我的頌缽老師，他是一位薩滿，同時也有在寺院長期修行的經歷，有多元的宗教背景.mp4';
+import videoBowl2025 from './assets/singingbowl.mp4';
+import imgHualienMarket from './assets/Hualien Market Handicrafts.jpg';
+import videoChristmasTree from './assets/NOV 2023, Showcase of my handmade Christmas tree weaving work.MOV';
+import imgChristmasTree from './assets/NOV 2023, Showcase of my handmade Christmas tree weaving work pic.JPG';
 
 export const projects: Project[] = [
   {
@@ -121,15 +124,17 @@ export const videos: VideoItem[] = [
     url: 'https://www.instagram.com/reel/CzgLOa1PaG9/',
     title: 'Hualien Market Handicrafts',
     date: 'NOV 2023',
-    description: 'Video record of my handmade weaving works displayed at a market in Hualien City.'
+    description: 'Video record of my handmade weaving works displayed at a market in Hualien City.',
+    thumbnailUrl: imgHualienMarket
   },
   {
     id: 'v6',
-    source: 'instagram',
-    url: 'https://www.instagram.com/reel/Cz9EaQgPMMV/',
+    source: 'local',
+    url: videoChristmasTree,
     title: 'Christmas Tree Weaving',
     date: 'NOV 2023',
-    description: 'Showcase of my handmade Christmas tree weaving work.'
+    description: 'Showcase of my handmade Christmas tree weaving work.',
+    thumbnailUrl: imgChristmasTree
   },
   {
     id: 'v7',

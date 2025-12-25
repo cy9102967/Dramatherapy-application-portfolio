@@ -3,7 +3,7 @@ import { projects } from './data';
 import { Project, Position } from './types';
 import FlashlightOverlay from './components/FlashlightOverlay';
 import ProjectModal from './components/ProjectModal';
-import VideoSection from './components/VideoSection';
+import VideoWheelSection from './components/VideoWheelSection';
 import JourneyIntro from './components/JourneyIntro';
 import { MousePointer2 } from 'lucide-react';
 
@@ -188,7 +188,7 @@ const App: React.FC = () => {
         </div>
 
         {/* Video Section */}
-        <VideoSection />
+        <VideoWheelSection />
 
         <footer className="w-full text-center text-gray-700 text-[10px] tracking-widest uppercase py-8 z-50">
           &copy; 2024 Yujun Shiao

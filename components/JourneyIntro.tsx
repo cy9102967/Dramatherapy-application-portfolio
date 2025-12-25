@@ -47,7 +47,7 @@ const JourneyIntro: React.FC<JourneyIntroProps> = ({ visible, onStart }) => {
                     onClick={onStart}
                     className="group relative px-10 py-4 bg-transparent border border-theater-gold/50 text-theater-gold font-outfit font-light text-lg tracking-[0.3em] uppercase hover:bg-theater-gold hover:text-black hover:border-theater-gold transition-all duration-500 ease-out overflow-hidden"
                 >
-                    <span className="relative z-10">Start Explore</span>
+                    <span className="relative z-10">Start</span>
                     <div className="absolute inset-0 bg-theater-gold transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-out" />
                 </button>
             </div>
