@@ -84,16 +84,12 @@ const VideoWheelSection: React.FC = () => {
                     igUrl += '/embed';
                 }
                 return (
-                    <div className="w-full h-full bg-black flex items-center justify-center relative rounded-lg overflow-hidden">
-                        <iframe
-                            className="w-[328px] max-h-full border-none rounded-sm"
-                            style={{ height: '800px' }}
-                            src={igUrl}
-                            title={video.title}
-                            allowFullScreen
-                            scrolling="no"
-                        />
-                    </div>
+                    <iframe
+                        className="w-full h-full border-none mx-auto"
+                        src={igUrl}
+                        title={video.title}
+                        allowFullScreen
+                    />
                 );
             case 'local':
                 return (
@@ -423,15 +419,6 @@ const VideoWheelSection: React.FC = () => {
                             ))}
                         </div>
                     </div>
-
-                    {/* Scroll Hint (Desktop) */}
-                    <div className="hidden lg:flex justify-center mt-8 text-gray-500 text-xs uppercase tracking-widest animate-pulse">
-                        {activeIndex < ITEMS_COUNT - 1 ? (
-                            <span>↓ Scroll to explore more</span>
-                        ) : (
-                            <span>↓ Continue scrolling</span>
-                        )}
-                    </div>
                 </div>
             </section>
 
@@ -451,7 +438,7 @@ const VideoWheelSection: React.FC = () => {
 
                     {/* Player Container */}
                     <div
-                        className="w-full max-w-5xl aspect-video"
+                        className={activeVideo.source === 'instagram' ? "w-full h-full max-w-[540px]" : "w-full max-w-5xl aspect-video"}
                         onClick={(e) => e.stopPropagation()}
                     >
                         {renderPlayer(activeVideo)}
